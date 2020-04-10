@@ -13,6 +13,7 @@ resource "aws_api_gateway_integration" "integration" {
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
   uri                     = var.invoke_arn
+  request_templates = var.request_templates
 }
 
 resource "aws_api_gateway_integration_response" "integration_response" {
@@ -26,7 +27,7 @@ resource "aws_api_gateway_integration_response" "integration_response" {
   response_templates = var.responses[count.index].templates
 }
 
-resource "aws_api_gateway_method_response" "method_response_200" {
+resource "aws_api_gateway_method_response" "method_response" {
   count = length(var.responses)
 
   rest_api_id = var.api_id
