@@ -1,7 +1,8 @@
 module "lambda_proxy" {
   source = "github.com/barneyparker/terraform-aws-api-generic"
 
-  api_id        = var.api_id
+  name               = var.name
+  api_id             = var.api_id
   resource_id        = var.resource_id
   http_method        = var.http_method
   authorization      = var.authorization
@@ -11,6 +12,10 @@ module "lambda_proxy" {
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
   uri                     = var.invoke_arn
+
+  request_validator_id = var.request_validator_id
+
+  model = var.model
 
   request_templates = var.request_templates
   responses         = var.responses
